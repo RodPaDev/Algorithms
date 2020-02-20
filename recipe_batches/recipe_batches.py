@@ -3,20 +3,15 @@
 import math
 
 def recipe_batches(recipe, ingredients):
-  results = []
-  if len(recipe) != len(ingredients):
-    return 0
+  min_ratio = math.inf
 
-  for key in recipe.keys():
-    results.append(ingredients[key] / recipe[key])
-
-  min_batch = min(results)
-
-  if min_batch < 1:
-    return 0
-  else:
-    return math.floor(min_batch)
-
+  for ingredient, amount in recipe.items():
+    if ingredient not in ingredients:
+      return 0
+    ratio = ingredients[ingredient] // amount
+    if ratio < min_ratio:
+      min_ratio = ratio
+  return min_ratio
 
 if __name__ == '__main__':
   # Change the entries of these dictionaries to test 
